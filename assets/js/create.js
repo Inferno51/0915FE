@@ -3,10 +3,10 @@
  *
  * Here's what this you will need to do:
  * 
- * 1. Include the following jQuery Validate JavaScript in layout.ejs
+ * DONE 1. Include the following jQuery Validate JavaScript in layout.ejs
  *    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
  *
- * 2. Use jQuery validate and add validation to the form with the following requirements
+ * DONE 2. Use jQuery validate and add validation to the form with the following requirements
  *    First Name - required, at least 2 characters
  *    Last Name  - required, at least 2 characters
  *	  email      - required, use email validation
@@ -15,11 +15,11 @@
  *	  Password   - required, 8 characters, 1 lowercase, 1 uppercase, 1 digit, and 1 specal char
  *	               REGEX: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^\&*\)\(+=._-])[0-9a-zA-Z!@#\$%\^\&*\)\(+=._-]{8,}$/
  *                   
- * 3. Use a custom message for password pattern validation
+ * DONE 3. Use a custom message for password pattern validation
  *
- * 4. Make the color of the error text red
+ * DONE 4. Make the color of the error text red
  *
- * 5. Add a Verify Password field to the form and add validation to make 
+ * DONE 5. Add a Verify Password field to the form and add validation to make 
  *    sure the 2 password fields are equal to eachother
  * 
  *
@@ -32,6 +32,42 @@
 
  $(function(){
 
- 	//code goes here
-
+ 	$("#addEmployeeForm").validate({
+    	rules: {
+	      	firstName: {
+	      		required: true,
+	      		minlength: 2
+	      	},
+	      	lastName: {
+	      		required: true,
+	      		minlength: 2
+	      	},
+	      	email: {
+	      		required: true,
+	      		email: true
+	      	},
+	      	homePhone: {
+	      		phoneUS: true
+	      	},
+	      	cellPhone: {
+	      		phoneUS: true
+	      	},
+	      	password: {
+	      		required: true,
+	      		pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^\&*\)\(+=._-])[0-9a-zA-Z!@#\$%\^\&*\)\(+=._-]{8,}$/
+	      	},
+	      	passwordValidate: {
+	      		required: true,
+	      		equalTo: "#password"
+	      	}
+    	},
+    	messages: {
+    		password: {
+    			required: "You must specify a password.",
+    			pattern: "Your password must include 8 characters, 1 lowercase, 1 uppercase, 1 digit, and 1 specal character."
+    		},
+    		
+    	},
+    	errorClass: "text-danger"
+    })
  })
